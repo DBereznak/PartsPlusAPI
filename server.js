@@ -2,8 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3");
 var app = express();
-var port = process.env.PORT || 3000;
-
+var port = process.env.PORT || 8443;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
