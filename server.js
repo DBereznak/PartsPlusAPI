@@ -5,6 +5,13 @@ var app = express();
 var port = process.env.PORT || 443;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://74.208.93.158:443");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+});
 
 app.get("/", function (req, res) {
   res.send("Parts Plus is live");
