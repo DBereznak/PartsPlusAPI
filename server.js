@@ -6,7 +6,7 @@ var port = process.env.PORT || 443;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://74.208.93.158:443/parts");
+  res.header("Access-Control-Allow-Origin", "http://74.208.93.158:443/*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -20,11 +20,6 @@ app.get("/", function (req, res) {
 
 // get all parts
 app.get("/parts", (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://74.208.93.158:443/parts");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   const db = new sqlite3.Database("./db/parts.db", (error) => {
     if (error) {
       console.error("Error opening Database " + error.message);
@@ -42,14 +37,6 @@ app.get("/parts", (req, res, next) => {
 
 // get part by id
 app.get("/parts/:id", (req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "http://74.208.93.158:443/parts/:id"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   const id = [req.params.id];
   const db = new sqlite3.Database("./db/parts.db", (error) => {
     if (error) {
@@ -69,14 +56,6 @@ app.get("/parts/:id", (req, res, next) => {
 
 // add new part
 app.post("/parts/new/", (req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "http://74.208.93.158:443/parts/new"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   const sql =
     "INSERT INTO parts (part_number, part_name, part_description, quantity, unit_price, sell_price, image_url) VALUES (?,?,?,?,?,?,?)";
   const data = {
@@ -118,14 +97,6 @@ app.post("/parts/new/", (req, res, next) => {
 
 // update parts
 app.patch("/parts/update/:id", (req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "http://74.208.93.158:443/parts/update/:id"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   const sql =
     "UPDATE parts SET part_name = ?, part_description = ?, quantity = ?, unit_price = ?, sell_price =?, image_url = ? WHERE part_number = ?";
   const data = {
@@ -162,14 +133,6 @@ app.patch("/parts/update/:id", (req, res, next) => {
 
 // delete part by id
 app.delete("/parts/delete/:id", (req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "http://74.208.93.158:443/parts/delete/:id"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   const id = req.params.id;
   const db = new sqlite3.Database("./db/parts.db", (error) => {
     if (error) {
